@@ -79,4 +79,23 @@ Assert-True ((Read-NativeIni $graphicsPath 'GraphicsOption' 'NVIDIA DLSS') -eq '
 $toml = "KeyOverlay = `"End`"`n[Upscale]`nDLSSRenderPreset = 11`n[Other]`nUpscaler = `"None`"`n"
 $updated = Set-SectionValue $toml 'Upscale' 'Upscaler' '"DLSS"' ' = '
 Assert-True ($updated.Contains("DLSSRenderPreset = 11`nUpscaler = `"DLSS`"`n[Other]`nUpscaler = `"None`"")) 'Missing key insertion changed unrelated settings'
-Write-Output "PASS: Windows INI regression, repair, WhatIf, installer, UI scales and FG preferences. PowerShell $($PSVersionTable.PSVersion). Fixtures: $fixtureRoot"
+# AA selection changes the reconstruction backend, never the requested FG state/multiplier.
+$opti = Set-SectionValue ([IO.File]::ReadAllText($optiPath)) 'FrameGen' 'Enabled' 'false' ' = '
+Write-GameConfig $optiPath $opti
+$beforeHash = (Get-FileHash -LiteralPath $optiPath).Hash
+& (Join-Path $repoRoot 'scripts\Set-MHWAntialiasing.ps1') -GameRoot $gameRoot -Mode FSR22 -WhatIf
+Assert-True ((Get-FileHash -LiteralPath $optiPath).Hash -eq $beforeHash) 'AA WhatIf changed configuration'
+& (Join-Path $repoRoot 'scripts\Set-MHWAntialiasing.ps1') -GameRoot $gameRoot -Mode FSR22
+Assert-True ((Read-NativeIni $optiPath 'Upscalers' 'Dx12Upscaler') -eq 'fsr22') 'FSR AA backend not selected'
+Assert-True ((Read-NativeIni $optiPath 'FrameGen' 'FGOutput') -eq 'dlssg') 'AA script selected FSR frame generation'
+Assert-True ((Read-NativeIni $optiPath 'FrameGen' 'Enabled') -eq 'false') 'AA script enabled FG during comparison'
+Assert-True ((Read-NativeIni $optiPath 'DLSSG' 'InterpolationCount') -eq '3') 'AA script changed multiplier'
+Assert-True ((Read-NativeIni $optiPath 'Menu' 'Scale') -eq '1.5') 'AA script changed menu scale'
+Assert-True ((Read-NativeIni $optiPath 'Menu' 'FpsScale') -eq '1.3') 'AA script changed FPS scale'
+Assert-True ((Read-NativeIni $graphicsPath 'GraphicsOption' 'Anti-Aliasing') -eq 'TAA') 'TAA hook input disabled'
+Assert-NoBom $mhwssPath
+Assert-NoBom $graphicsPath
+Assert-NoBom $optiPath
+& (Join-Path $repoRoot 'scripts\Set-MHWAntialiasing.ps1') -GameRoot $gameRoot -Mode DLAA
+Assert-True ((Read-NativeIni $optiPath 'Upscalers' 'Dx12Upscaler') -eq 'dlss') 'Return to DLAA failed'
+Write-Output "PASS: Windows INI regression, repair, WhatIf, installer, AA profiles, UI scales and FG preferences. PowerShell $($PSVersionTable.PSVersion). Fixtures: $fixtureRoot"

@@ -41,6 +41,30 @@ MHWSS 的 DLSS/DLAA 输入 → MHWFG 捕获运动矢量、深度和画面 → DL
 
 本机日志记录 `quality mode: 5`、输入 2560×1440、输出 2560×1440，即原生分辨率 DLAA。`DLSSRenderPreset=11` 对应模型 K，既不是 Quality 档，也不是 11 倍缩放。更改模型不改变游戏实际渲染尺寸。游戏自带 DLSS 是另一套旧实现，MHWSS 启动器会将其关闭。
 
+DLSS 超分和 DLAA 本身负责时间抗锯齿，通常替代原生 TAA。MHWFG/MHWSS 安装说明要求游戏菜单开启 TAA，以便接入该阶段；这不意味着还需要在 DLSS/DLAA 之后叠加一次 TAA。下面的 FSR 路线也是替换抗锯齿后端，而非增加一层抗锯齿。
+
 DLAA 会增加原生渲染之后的处理开销，帧生成也有成本。真正的 Quality/Balanced 超分需要降低游戏内部渲染尺寸，并正确处理对应深度、运动矢量和后处理；这不是当前包中已经实现或验证的功能。当前包也没有声称提供“关闭所有抗锯齿但独立运行 DLSSG”的后端。
 
 应以同一场景、同一机位的真实 FPS 和帧时间比较性能。FPS 叠加层的 `Upscaler Time` 在这套原生输入下是抗锯齿/重建处理耗时；Reflex 各阶段计时并非完整鼠标到光子的延迟。
+
+### DLAA 开销与可选 FSR 原生抗锯齿
+
+用户随后报告了同场景、关闭帧生成的对比：MHWSS 为 None 时约 130 多 FPS，开启 DLSS/DLAA 后约 80 FPS。按 130 和 80 估算，帧时间从 7.7 ms 增至 12.5 ms，差约 4.8 ms。这是整条 MHWSS DLAA 路径的差值，不能等同于单个 DLSS GPU 算子的精确耗时。
+
+MHWFG 内置 FSR 2.2 后端，可用它替代 DLAA 处理原生输入；DLSSG 仍负责帧生成。该路径的代码已核对，但在这台 MHW 安装上的画质、性能及持续帧生成尚未验证，因此作为可选实验配置提供，默认仍为 DLAA。
+
+退出游戏后应用：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\Set-MHWAntialiasing.ps1 -Mode FSR22
+```
+
+脚本将 MHWSS 保持在 `DLSS` 输入通道，将 MHWFG 的 `Dx12Upscaler` 改为 `fsr22`，保持 `FGOutput=dlssg`。这只改变抗锯齿后端，不是将帧生成改为 FSR。游戏的 TAA 选项保持开启，供 MHWSS 挂接；帧生成开关、倍率和 UI 缩放保持原值。首先取消 MHWFG 的 Active 比较真实帧率，再开启 Active 检查输出 FPS 与运动画面。
+
+若当前运行已检测到输入，也可用 Insert → Advanced → Upscalers 下拉框选择 FSR 2.2，点击 Change Upscaler；不要改 Frame Generation 的输出下拉框。出现黑屏、闪烁或无法检测输入时，退出游戏并回退：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\Set-MHWAntialiasing.ps1 -Mode DLAA
+```
+
+这两种模式都进行抗锯齿。MHWSS 的 None 仅停用它自己的处理，若游戏仍选 TAA，画面并非完全没有抗锯齿。当前包没有独立的无抗锯齿 DLSSG 输入后端。

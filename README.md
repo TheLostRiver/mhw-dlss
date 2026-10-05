@@ -51,6 +51,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Repair-MHWDisplay.ps1
 
 本机已验证编码修复能够恢复 DX12 启动。用户也报告重新进入游戏后 `None + 无帧生成` 的基础帧率恢复，但未完成受控对照，不能将 59–60 FPS 的原因直接定为同步设置，也不能据此认定 DLAA/MFG 的性能问题已经解决。诊断依据、回退方法和 DLAA 性能限制见 [故障说明](docs/TROUBLESHOOTING.md)。
 
+对 DLAA 开销敏感的用户，可用 `scripts/Set-MHWAntialiasing.ps1 -Mode FSR22` 试验 FSR 原生抗锯齿搭配 DLSSG；`-Mode DLAA` 恢复。需要先退出游戏。这条可选路径尚待 MHW 实机性能和画质验证，详见上述故障说明。
+
 ## 运行入口
 
 只使用根目录的 `version.dll` 作为 SM86 代理。不要把 `alternatives\winmm.dll` 与它同时复制到游戏根目录；Streamline 自身依赖 WINMM，双重代理会造成递归加载。
