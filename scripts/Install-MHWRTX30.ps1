@@ -6,7 +6,10 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'ConfigFile.ps1')
 if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) { $RepositoryRoot = Split-Path -Parent $PSScriptRoot }
+$GameRoot = (Resolve-Path -LiteralPath $GameRoot).Path
+$RepositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $runtime = Join-Path $RepositoryRoot 'runtime'
 $config = Join-Path $RepositoryRoot 'config'
 $required = @(
@@ -16,12 +19,18 @@ $required = @(
     (Join-Path $runtime 'd3d12.dll'),
     (Join-Path $runtime 'version.dll'),
     (Join-Path $config 'OptiScaler.ini'),
+    (Join-Path $config 'MHWSS_config.toml.recommended'),
     (Join-Path $config 'dlssg_sm86.ini')
 )
 $missing = @($required | Where-Object { -not (Test-Path -LiteralPath $_ -PathType Leaf) })
 if ($missing.Count) { throw "Missing required files:`n$($missing -join "`n")" }
 
-$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+$runningGame = @(Get-Process -Name MonsterHunterWorld -ErrorAction SilentlyContinue |
+    Where-Object { $_.Path -eq (Join-Path $GameRoot 'MonsterHunterWorld.exe') })
+if ($runningGame.Count) { throw 'Exit Monster Hunter: World normally before installing.' }
+if (-not $PSCmdlet.ShouldProcess($GameRoot, 'Install MHW RTX30 runtime and configuration')) { return }
+
+$stamp = Get-Date -Format 'yyyyMMdd-HHmmss-fff'
 $backupRoot = Join-Path $RepositoryRoot "backups\$stamp"
 New-Item -ItemType Directory -Force -Path "$backupRoot\root", "$backupRoot\nativePC\plugins", "$backupRoot\MHWSS" | Out-Null
 $manifest = [System.Collections.Generic.List[object]]::new()
@@ -37,6 +46,7 @@ function Backup-File([string]$RelativePath) {
 foreach ($name in @('d3d12.dll','version.dll','winmm.dll','OptiScaler.ini','dlssg_sm86.ini','MHWFG.cmd','nvngx_dlisp.dll')) { Backup-File $name }
 foreach ($name in @('OptiScaler.dll','OptiScaler.ini')) { Backup-File "nativePC\plugins\$name" }
 Backup-File 'MHWSS\MHWSS_config.toml'
+Backup-File 'graphics_option.ini'
 $manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $backupRoot 'manifest.json') -Encoding utf8
 
 $dlisp = Join-Path $GameRoot 'nvngx_dlisp.dll'
@@ -56,13 +66,22 @@ Copy-Item -Path (Join-Path $runtime 'OptiScaler\streamline\*') -Destination (Joi
 
 $mhwssConfig = Join-Path $GameRoot 'MHWSS\MHWSS_config.toml'
 if (Test-Path -LiteralPath $mhwssConfig) {
-    $lines = Get-Content $mhwssConfig
-    $section = ''
-    $out = foreach ($line in $lines) {
-        if ($line -match '^\s*\[(.+)\]') { $section = $Matches[1] }
-        if ($section -eq 'Upscale' -and $line -match '^\s*Upscaler\s*=') { 'Upscaler = "DLSS"' } else { $line }
-    }
-    Set-Content -LiteralPath $mhwssConfig -Value $out -Encoding utf8
+    $text = [IO.File]::ReadAllText($mhwssConfig)
+} else {
+    New-Item -ItemType Directory -Force -Path (Split-Path $mhwssConfig) | Out-Null
+    $text = [IO.File]::ReadAllText((Join-Path $config 'MHWSS_config.toml.recommended'))
+}
+$text = Set-SectionValue $text 'Upscale' 'Upscaler' '"DLSS"' ' = '
+Write-GameConfig $mhwssConfig $text
+
+$graphicsConfig = Join-Path $GameRoot 'graphics_option.ini'
+if (Test-Path -LiteralPath $graphicsConfig) {
+    $text = [IO.File]::ReadAllText($graphicsConfig)
+    $text = Set-SectionValue $text 'GraphicsOption' 'DirectX12Enable' 'On'
+    $text = Set-SectionValue $text 'GraphicsOption' 'NVIDIA DLSS' 'Off'
+    $text = Set-SectionValue $text 'GraphicsOption' 'FidelityFX CAS' 'Off'
+    Write-GameConfig $graphicsConfig $text
 }
 Write-Output "Installed MHW RTX30 package. Backup: $backupRoot"
 Write-Output 'Launch with MHWSSLauncher.exe; do not add alternatives\winmm.dll beside version.dll.'
+Write-Output 'MHWSS DLSS supplies native-resolution DLAA inputs, not Quality/Balanced super resolution.'

@@ -3,6 +3,8 @@ KeyOverlay = "End"
 
 [Upscale]
 Sharpness = 0.0
+# Model preset, not a Quality/Balanced resolution selector.
 DLSSRenderPreset = 0
+# MHWSS 1.0.2 supplies native-resolution DLAA inputs to MHWFG.
 Upscaler = "DLSS"
 
