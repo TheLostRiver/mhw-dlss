@@ -1,0 +1,21 @@
+# Local build and deployment state
+backups/
+build/
+package/
+*.png
+*.jpg
+*.jsonl
+evidence/rtx3070/MHWSS.log
+evidence/rtx3070/MHWSS_config.toml
+# Local editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+/INSTALL-RTX30.md
+/restore-rtx30.ps1
+
+
+/evidence/
+

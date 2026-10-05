@@ -1,0 +1,8 @@
+bIsOverlayUsed = true
+KeyOverlay = "End"
+
+[Upscale]
+Sharpness = 0.0
+DLSSRenderPreset = 0
+Upscaler = "DLSS"
+

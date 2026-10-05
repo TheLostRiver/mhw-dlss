@@ -1,0 +1,24 @@
+[
+  {
+    "File": "backend_109232.jsonl",
+    "Gpu": "NVIDIA GeForce RTX 3070 Laptop GPU",
+    "SM": 86,
+    "MaxFrames": 5,
+    "Hags": "on",
+    "FGCreate": true,
+    "MultiFrameCount": 1,
+    "MultiFrameMax": 5,
+    "CudaLaunches": 64
+  },
+  {
+    "File": "backend_107988.jsonl",
+    "Gpu": "NVIDIA GeForce RTX 3070 Laptop GPU",
+    "SM": 86,
+    "MaxFrames": 5,
+    "Hags": "on",
+    "FGCreate": true,
+    "MultiFrameCount": 3,
+    "MultiFrameMax": 5,
+    "CudaLaunches": 64
+  }
+]
