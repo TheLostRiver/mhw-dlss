@@ -1,5 +1,9 @@
 # Build and provenance
 
+## Experimental Native No AA
+
+`src/native/` and `patches/native-no-aa.patch` add a DX12 native-copy backend, a version-checked MHWSS projection-jitter hook, menu selection and FG shutdown handling to the pinned MHWFG tree below. Build using `scripts/Build-MHWNoAA.ps1`; usage, validation limits and rollback are in [NO-AA.md](NO-AA.md). The experimental DLL is separate from the default runtime.
+
 ## MHWFG
 
 - Upstream integration tree: https://github.com/inhm112/MHW-DLSSFrameGen

@@ -53,6 +53,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Repair-MHWDisplay.ps1
 
 对 DLAA 开销敏感的用户，可用 `scripts/Set-MHWAntialiasing.ps1 -Mode FSR22` 试验 FSR 原生抗锯齿搭配 DLSSG；`-Mode DLAA` 恢复。需要先退出游戏。这条可选路径尚待 MHW 实机性能和画质验证，详见上述故障说明。
 
+“完全关闭抗锯齿、保留帧生成”的实验后端见 [Native No AA](docs/NO-AA.md)。提供源码、构建脚本和独立 DLL；已验证原图复制及抖动归零，但关闭后的性能恢复、2x 净收益仍在排查，不作为默认推荐配置。
+
 ## 运行入口
 
 只使用根目录的 `version.dll` 作为 SM86 代理。不要把 `alternatives\winmm.dll` 与它同时复制到游戏根目录；Streamline 自身依赖 WINMM，双重代理会造成递归加载。

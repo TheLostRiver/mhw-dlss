@@ -1,6 +1,6 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [Parameter(Mandatory)][ValidateSet('DLAA', 'FSR22')][string]$Mode,
+    [Parameter(Mandatory)][ValidateSet('DLAA', 'FSR22', 'NativeNoAA')][string]$Mode,
     [string]$GameRoot = 'D:\Software\Steam\steamapps\common\Monster Hunter World'
 )
 Set-StrictMode -Version Latest
@@ -16,14 +16,28 @@ foreach ($path in @($optiPath, $graphicsPath, $mhwssPath, (Join-Path $GameRoot '
 $running = @(Get-Process -Name MonsterHunterWorld -ErrorAction SilentlyContinue |
     Where-Object { $_.Path -eq (Join-Path $GameRoot 'MonsterHunterWorld.exe') })
 if ($running.Count) { throw 'Exit the game normally before changing the antialiasing backend.' }
+
+$nativeDll = Join-Path (Split-Path -Parent $PSScriptRoot) 'runtime\experimental\no-aa\d3d12.dll'
+if ($Mode -eq 'NativeNoAA') {
+    $expectedMhwss = '55D52CAF2E7BBA5220EC721149BC067679BF9391BBF55D62BED3EC9522CCD09A'
+    if ((Get-FileHash -LiteralPath (Join-Path $GameRoot 'MHWSS.dll')).Hash -ne $expectedMhwss) {
+        throw 'NativeNoAA requires the verified MHWSS 1.0.2 DLL. Unknown versions are not patched.'
+    }
+    if (-not (Test-Path -LiteralPath $nativeDll -PathType Leaf)) { throw "Missing NativeNoAA runtime: $nativeDll" }
+}
 if (-not $PSCmdlet.ShouldProcess($GameRoot, "Select $Mode antialiasing with DLSSG frame-generation output")) { return }
 
 $backupRoot = Join-Path $GameRoot ('MHW-Display-Backups\AA-' + (Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
 New-Item -ItemType Directory -Path (Join-Path $backupRoot 'MHWSS') | Out-Null
 Copy-Item -LiteralPath $optiPath, $graphicsPath -Destination $backupRoot
 Copy-Item -LiteralPath $mhwssPath -Destination (Join-Path $backupRoot 'MHWSS')
+if ($Mode -eq 'NativeNoAA') {
+    $gameDll = Join-Path $GameRoot 'd3d12.dll'
+    if (Test-Path -LiteralPath $gameDll) { Copy-Item -LiteralPath $gameDll -Destination $backupRoot }
+    Copy-Item -LiteralPath $nativeDll -Destination $gameDll
+}
 
-$backend = if ($Mode -eq 'FSR22') { 'fsr22' } else { 'dlss' }
+$backend = switch ($Mode) { 'FSR22' { 'fsr22' }; 'NativeNoAA' { 'native' }; default { 'dlss' } }
 $opti = [IO.File]::ReadAllText($optiPath)
 $opti = Set-SectionValue $opti 'Upscalers' 'Dx12Upscaler' $backend ' = '
 $opti = Set-SectionValue $opti 'Inputs' 'EnableDlssInputs' 'true' ' = '
@@ -43,4 +57,8 @@ Write-Output "Antialiasing backend: $backend. Backup: $backupRoot"
 Write-Output 'Keep MHWSS on DLSS for its inputs. MHWFG performs the selected antialiasing; FG output stays DLSSG.'
 if ($Mode -eq 'FSR22') {
     Write-Output 'Experimental MHW profile: compare real FPS and visual stability with Active off, then on.'
+}
+if ($Mode -eq 'NativeNoAA') {
+    Write-Output 'Experimental No AA runtime installed. Native copy and projection jitter suppression replace DLAA.'
+    Write-Output 'Switch back using -Mode DLAA, or restore the backed-up DLL and configs for a full rollback.'
 }

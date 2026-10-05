@@ -98,4 +98,13 @@ Assert-NoBom $graphicsPath
 Assert-NoBom $optiPath
 & (Join-Path $repoRoot 'scripts\Set-MHWAntialiasing.ps1') -GameRoot $gameRoot -Mode DLAA
 Assert-True ((Read-NativeIni $optiPath 'Upscalers' 'Dx12Upscaler') -eq 'dlss') 'Return to DLAA failed'
+$beforeHash = (Get-FileHash -LiteralPath $optiPath).Hash
+$rejected = $false
+try {
+    & (Join-Path $repoRoot 'scripts\Set-MHWAntialiasing.ps1') -GameRoot $gameRoot -Mode NativeNoAA
+} catch {
+    $rejected = $_.Exception.Message -like '*verified MHWSS 1.0.2*'
+}
+Assert-True $rejected 'Unknown MHWSS version was not rejected for the jitter hook'
+Assert-True ((Get-FileHash -LiteralPath $optiPath).Hash -eq $beforeHash) 'Rejected NativeNoAA request changed configuration'
 Write-Output "PASS: Windows INI regression, repair, WhatIf, installer, AA profiles, UI scales and FG preferences. PowerShell $($PSVersionTable.PSVersion). Fixtures: $fixtureRoot"

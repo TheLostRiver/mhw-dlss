@@ -43,7 +43,7 @@ MHWSS 的 DLSS/DLAA 输入 → MHWFG 捕获运动矢量、深度和画面 → DL
 
 DLSS 超分和 DLAA 本身负责时间抗锯齿，通常替代原生 TAA。MHWFG/MHWSS 安装说明要求游戏菜单开启 TAA，以便接入该阶段；这不意味着还需要在 DLSS/DLAA 之后叠加一次 TAA。下面的 FSR 路线也是替换抗锯齿后端，而非增加一层抗锯齿。
 
-DLAA 会增加原生渲染之后的处理开销，帧生成也有成本。真正的 Quality/Balanced 超分需要降低游戏内部渲染尺寸，并正确处理对应深度、运动矢量和后处理；这不是当前包中已经实现或验证的功能。当前包也没有声称提供“关闭所有抗锯齿但独立运行 DLSSG”的后端。
+DLAA 会增加原生渲染之后的处理开销，帧生成也有成本。真正的 Quality/Balanced 超分需要降低游戏内部渲染尺寸，并正确处理对应深度、运动矢量和后处理；这不是当前包中已经实现或验证的功能。默认运行包仍依赖 DLAA 输入；另外提供的无 AA 实验后端及其当前限制见 [NO-AA.md](NO-AA.md)。
 
 应以同一场景、同一机位的真实 FPS 和帧时间比较性能。FPS 叠加层的 `Upscaler Time` 在这套原生输入下是抗锯齿/重建处理耗时；Reflex 各阶段计时并非完整鼠标到光子的延迟。
 
@@ -67,4 +67,4 @@ powershell -ExecutionPolicy Bypass -File .\scripts\Set-MHWAntialiasing.ps1 -Mode
 powershell -ExecutionPolicy Bypass -File .\scripts\Set-MHWAntialiasing.ps1 -Mode DLAA
 ```
 
-这两种模式都进行抗锯齿。MHWSS 的 None 仅停用它自己的处理，若游戏仍选 TAA，画面并非完全没有抗锯齿。当前包没有独立的无抗锯齿 DLSSG 输入后端。
+这两种模式都进行抗锯齿。MHWSS 的 None 仅停用它自己的处理，若游戏仍选 TAA，画面并非完全没有抗锯齿。另有独立提供的 [Native No AA 实验后端](NO-AA.md)，请注意其中的验证范围和已知问题。

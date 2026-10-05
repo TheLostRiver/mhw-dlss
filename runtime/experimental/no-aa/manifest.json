@@ -1,0 +1,21 @@
+{
+  "Schema": 1,
+  "Kind": "experimental-native-no-aa",
+  "Upstream": "https://github.com/inhm112/MHW-DLSSFrameGen",
+  "UpstreamCommit": "a0421ee5937eb2d803f67a89d6993fb13c670c04",
+  "Configuration": "Release x64 MHWFGProduction=true",
+  "DllSHA256": "7a402520a2d5ede7ca8dbc6292347cc574e42a85d0355462f9cc14c344e60e47",
+  "MhwssSHA256": "55d52caf2e7bba5220ec721149bc067679bf9391bbf55d62bed3ec9522ccd09a",
+  "Verified": [
+    "native current-frame copy matches input in WARP test",
+    "MHWSS input jitter reaches zero in live game",
+    "DLSSG SM86 feature creation at 2x and 4x",
+    "clean worktree rebuild through scripts/Build-MHWNoAA.ps1"
+  ],
+  "Pending": [
+    "post-disable FPS recovery with lifecycle fix",
+    "net frame-rate benefit and latency under 2x",
+    "extended gameplay and visual stability"
+  ],
+  "BuildTag": "native-no-aa-lifecycle-timing-v2"
+}

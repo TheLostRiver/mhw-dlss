@@ -1,0 +1,573 @@
+diff --git a/OptiScaler/OptiScaler.vcxproj b/OptiScaler/OptiScaler.vcxproj
+index 4c2fdd9..858cdea 100644
+--- a/OptiScaler/OptiScaler.vcxproj
++++ b/OptiScaler/OptiScaler.vcxproj
+@@ -1,4 +1,4 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
++<?xml version="1.0" encoding="utf-8"?>
+ <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|Win32">
+@@ -100,29 +100,29 @@
+   </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+-    <IncludePath>$(SolutionDir)external\simpleini;$(SolutionDir)\external\nvngx_dlss_sdk;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)\external\vulkan\include;$(SolutionDir)\external\xess\inc\xess;$(IncludePath)</IncludePath>
++    <IncludePath>$(SolutionDir)external\FidelityFX-SDK\framework\cauldron\framework\libs\dxheaders\include\directx;$(SolutionDir)external\simpleini;$(SolutionDir)\external\nvngx_dlss_sdk;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)\external\vulkan\include;$(SolutionDir)\external\xess\inc\xess;$(IncludePath)</IncludePath>
+     <LibraryPath>$(SolutionDir)\external\xess\lib;$(LibraryPath)</LibraryPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+-    <IncludePath>$(SolutionDir)external\simpleini;$(SolutionDir)\external\nvngx_dlss_sdk;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)\external\vulkan\include;$(SolutionDir)\external\xess\inc\xess;$(IncludePath)</IncludePath>
++    <IncludePath>$(SolutionDir)external\FidelityFX-SDK\framework\cauldron\framework\libs\dxheaders\include\directx;$(SolutionDir)external\simpleini;$(SolutionDir)\external\nvngx_dlss_sdk;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)\external\vulkan\include;$(SolutionDir)\external\xess\inc\xess;$(IncludePath)</IncludePath>
+     <LibraryPath>$(SolutionDir)\external\xess\lib;$(LibraryPath)</LibraryPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|Win32'">
+-    <IncludePath>$(SolutionDir)external\simpleini;$(SolutionDir)\external\nvngx_dlss_sdk;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)\external\vulkan\include;$(SolutionDir)\external\xess\inc\xess;$(IncludePath)</IncludePath>
++    <IncludePath>$(SolutionDir)external\FidelityFX-SDK\framework\cauldron\framework\libs\dxheaders\include\directx;$(SolutionDir)external\simpleini;$(SolutionDir)\external\nvngx_dlss_sdk;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)\external\vulkan\include;$(SolutionDir)\external\xess\inc\xess;$(IncludePath)</IncludePath>
+     <LibraryPath>$(SolutionDir)\external\xess\lib;$(LibraryPath)</LibraryPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+-    <IncludePath>$(ProjectDir);$(ProjectDir)include\;$(SolutionDir)external\vulkan\include;$(SolutionDir)external\nvngx_dlss_sdk;$(SolutionDir)external\xess\inc\xess;$(SolutionDir)external\xess\inc\xell;$(SolutionDir)external\xess\inc\xess_fg;$(SolutionDir)external\FidelityFX-SDK\ffx-api\include\ffx_api;$(SolutionDir)external\simpleini;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)external\spdlog\include;$(SolutionDir)external\freetype;$(SolutionDir)external\streamline;$(SolutionDir)external\streamline1;$(SolutionDir)external\nvapi;$(SolutionDir)external\nlohmann;$(SolutionDir)external\fakenvapi;$(SolutionDir)external\magic_enum\include\magic_enum;$(SolutionDir)external\AntiLag2-SDK;$(SolutionDir)external\latencyflex;$(IncludePath)</IncludePath>
++    <IncludePath>$(SolutionDir)external\FidelityFX-SDK\framework\cauldron\framework\libs\dxheaders\include\directx;$(ProjectDir);$(ProjectDir)include\;$(SolutionDir)external\vulkan\include;$(SolutionDir)external\nvngx_dlss_sdk;$(SolutionDir)external\xess\inc\xess;$(SolutionDir)external\xess\inc\xell;$(SolutionDir)external\xess\inc\xess_fg;$(SolutionDir)external\FidelityFX-SDK\ffx-api\include\ffx_api;$(SolutionDir)external\simpleini;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)external\spdlog\include;$(SolutionDir)external\freetype;$(SolutionDir)external\streamline;$(SolutionDir)external\streamline1;$(SolutionDir)external\nvapi;$(SolutionDir)external\nlohmann;$(SolutionDir)external\fakenvapi;$(SolutionDir)external\magic_enum\include\magic_enum;$(SolutionDir)external\AntiLag2-SDK;$(SolutionDir)external\latencyflex;$(IncludePath)</IncludePath>
+     <LibraryPath>$(ProjectDir)library\fsr2;$(ProjectDir)library\fsr2_212;$(ProjectDir)library\fsr31;$(ProjectDir)library\vulkan;$(ProjectDir)library\d3dx;$(ProjectDir)library\detours;$(SolutionDir)external\xess\lib;$(SolutionDir)external\freetype;$(LibraryPath)</LibraryPath>
+     <IntDir>.\x64\Debug\</IntDir>
+     <TargetExt>.dll</TargetExt>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+-    <IncludePath>$(ProjectDir);$(ProjectDir)include\;$(SolutionDir)external\vulkan\include;$(SolutionDir)external\nvngx_dlss_sdk;$(SolutionDir)external\xess\inc\xess;$(SolutionDir)external\xess\inc\xell;$(SolutionDir)external\xess\inc\xess_fg;$(SolutionDir)external\FidelityFX-SDK\ffx-api\include\ffx_api;$(SolutionDir)external\simpleini;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)external\spdlog\include;$(SolutionDir)external\freetype;$(SolutionDir)external\streamline;$(SolutionDir)external\streamline1;$(SolutionDir)external\nvapi;$(SolutionDir)external\nlohmann;$(SolutionDir)external\fakenvapi;$(SolutionDir)external\magic_enum\include\magic_enum;$(SolutionDir)external\AntiLag2-SDK;$(SolutionDir)external\latencyflex;$(IncludePath)</IncludePath>
++    <IncludePath>$(SolutionDir)external\FidelityFX-SDK\framework\cauldron\framework\libs\dxheaders\include\directx;$(ProjectDir);$(ProjectDir)include\;$(SolutionDir)external\vulkan\include;$(SolutionDir)external\nvngx_dlss_sdk;$(SolutionDir)external\xess\inc\xess;$(SolutionDir)external\xess\inc\xell;$(SolutionDir)external\xess\inc\xess_fg;$(SolutionDir)external\FidelityFX-SDK\ffx-api\include\ffx_api;$(SolutionDir)external\simpleini;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)external\spdlog\include;$(SolutionDir)external\freetype;$(SolutionDir)external\streamline;$(SolutionDir)external\streamline1;$(SolutionDir)external\nvapi;$(SolutionDir)external\nlohmann;$(SolutionDir)external\fakenvapi;$(SolutionDir)external\magic_enum\include\magic_enum;$(SolutionDir)external\AntiLag2-SDK;$(SolutionDir)external\latencyflex;$(IncludePath)</IncludePath>
+     <LibraryPath>$(ProjectDir)library\fsr2;$(ProjectDir)library\fsr2_212;$(ProjectDir)library\fsr31;$(ProjectDir)library\vulkan;$(ProjectDir)library\d3dx;$(ProjectDir)library\detours;$(SolutionDir)external\xess\lib;$(SolutionDir)external\freetype;$(LibraryPath)</LibraryPath>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDebug|x64'">
+-    <IncludePath>$(ProjectDir);$(ProjectDir)include\;$(SolutionDir)external\vulkan\include;$(SolutionDir)external\nvngx_dlss_sdk;$(SolutionDir)external\xess\inc\xess;$(SolutionDir)external\xess\inc\xell;$(SolutionDir)external\xess\inc\xess_fg;$(SolutionDir)external\FidelityFX-SDK\ffx-api\include\ffx_api;$(SolutionDir)external\simpleini;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)external\spdlog\include;$(SolutionDir)external\freetype;$(SolutionDir)external\streamline;$(SolutionDir)external\streamline1;$(SolutionDir)external\nvapi;$(SolutionDir)external\nlohmann;$(SolutionDir)external\fakenvapi;$(SolutionDir)external\magic_enum\include\magic_enum;$(SolutionDir)external\AntiLag2-SDK;$(SolutionDir)external\latencyflex;$(IncludePath)</IncludePath>
++    <IncludePath>$(SolutionDir)external\FidelityFX-SDK\framework\cauldron\framework\libs\dxheaders\include\directx;$(ProjectDir);$(ProjectDir)include\;$(SolutionDir)external\vulkan\include;$(SolutionDir)external\nvngx_dlss_sdk;$(SolutionDir)external\xess\inc\xess;$(SolutionDir)external\xess\inc\xell;$(SolutionDir)external\xess\inc\xess_fg;$(SolutionDir)external\FidelityFX-SDK\ffx-api\include\ffx_api;$(SolutionDir)external\simpleini;$(SolutionDir)external\unordered_dense\include;$(SolutionDir)external\spdlog\include;$(SolutionDir)external\freetype;$(SolutionDir)external\streamline;$(SolutionDir)external\streamline1;$(SolutionDir)external\nvapi;$(SolutionDir)external\nlohmann;$(SolutionDir)external\fakenvapi;$(SolutionDir)external\magic_enum\include\magic_enum;$(SolutionDir)external\AntiLag2-SDK;$(SolutionDir)external\latencyflex;$(IncludePath)</IncludePath>
+     <LibraryPath>$(ProjectDir)library\fsr2;$(ProjectDir)library\fsr2_212;$(ProjectDir)library\fsr31;$(ProjectDir)library\vulkan;$(ProjectDir)library\d3dx;$(ProjectDir)library\detours;$(SolutionDir)external\xess\lib;$(SolutionDir)external\freetype;$(LibraryPath)</LibraryPath>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+@@ -543,6 +543,7 @@ copy NUL "$(SolutionDir)x64\Release\a\!! EXTRACT ALL FILES TO GAME FOLDER !!" /Y
+     <ClInclude Include="upscalers\fsr2\FSR2Feature_Dx12.h" />
+     <ClInclude Include="upscalers\fsr2\FSR2Feature_Vk.h" />
+     <ClInclude Include="upscalers\IFeature_Dx11.h" />
++    <ClInclude Include="upscalers\native\NativeFeature_Dx12.h" />
+     <ClInclude Include="upscalers\IFeature_Dx12.h" />
+     <ClInclude Include="upscalers\IFeature.h" />
+     <ClInclude Include="upscalers\IFeature_Vk.h" />
+@@ -757,6 +758,8 @@ copy NUL "$(SolutionDir)x64\Release\a\!! EXTRACT ALL FILES TO GAME FOLDER !!" /Y
+     <ClCompile Include="upscalers\dlss\DLSSFeature_Dx12.cpp" />
+     <ClCompile Include="upscalers\dlss\DLSSFeature_Vk.cpp" />
+     <ClCompile Include="upscalers\FeatureProvider_Dx11.cpp" />
++    <ClCompile Include="upscalers\native\MhwssJitter.cpp" />
++    <ClCompile Include="upscalers\native\NativeFeature_Dx12.cpp" />
+     <ClCompile Include="upscalers\FeatureProvider_Dx12.cpp" />
+     <ClCompile Include="upscalers\FeatureProvider_Vk.cpp" />
+     <ClCompile Include="upscalers\fsr2_212\FSR2Feature_212.cpp" />
+diff --git a/OptiScaler/OptiTypes.cpp b/OptiScaler/OptiTypes.cpp
+index c469087..2951c3f 100644
+--- a/OptiScaler/OptiTypes.cpp
++++ b/OptiScaler/OptiTypes.cpp
+@@ -78,6 +78,8 @@ std::string UpscalerDisplayName(Upscaler upscaler, API api)
+ 
+     case Upscaler::DLSSD:
+         return "DLSSD";
++    case Upscaler::Native:
++        return "Native (No AA, experimental)";
+     }
+ 
+     return "????";
+@@ -102,6 +104,8 @@ bool IsFsr(Upscaler upscaler)
+ 
+ std::string UpscalerShortName(Upscaler upscaler)
+ {
++    if (upscaler == Upscaler::Native)
++        return "No AA";
+     if (IsFsr(upscaler))
+         return "FSR";
+ 
+@@ -124,6 +128,8 @@ std::string UpscalerShortName(Upscaler upscaler)
+ // Converts enum to the string codes for config
+ std::string UpscalerToCode(Upscaler upscaler)
+ {
++    if (upscaler == Upscaler::Native)
++        return "native";
+     switch (upscaler)
+     {
+     case Upscaler::XeSS:
+@@ -157,6 +163,7 @@ std::string UpscalerToCode(Upscaler upscaler)
+ Upscaler CodeToUpscaler(const std::string& code)
+ {
+     static const std::unordered_map<std::string, Upscaler> mapping = {
++        { "native", Upscaler::Native },
+         { "xess", Upscaler::XeSS },   { "xess_12", Upscaler::XeSS_on12 },
+         { "fsr21", Upscaler::FSR21 }, { "fsr21_12", Upscaler::FSR21_on12 },
+         { "fsr22", Upscaler::FSR22 }, { "fsr22_12", Upscaler::FSR22_on12 },
+diff --git a/OptiScaler/OptiTypes.h b/OptiScaler/OptiTypes.h
+index 4cd6c02..0c1580c 100644
+--- a/OptiScaler/OptiTypes.h
++++ b/OptiScaler/OptiTypes.h
+@@ -63,7 +63,8 @@ enum class Upscaler
+     DLSS, // "dlss", used for the DLSS upscaler backend
+ 
+     DLSSD, // "dlssd", used for the DLSS-D/Ray Reconstruction upscaler+denoiser backend
+-    Reset
++    Reset,
++    Native // "native", DX12 current-frame copy, no reconstruction or AA
+ };
+ 
+ enum class ApiUpscalerInput
+diff --git a/OptiScaler/framegen/dlssg/DLSSG_Dx12.cpp b/OptiScaler/framegen/dlssg/DLSSG_Dx12.cpp
+index b543aad..ceb177a 100644
+--- a/OptiScaler/framegen/dlssg/DLSSG_Dx12.cpp
++++ b/OptiScaler/framegen/dlssg/DLSSG_Dx12.cpp
+@@ -974,7 +974,7 @@ void DLSSG_Dx12::Deactivate()
+ {
+     LOG_DEBUG("");
+ 
+-    if (_isActive)
++    if (_isActive || _waitingNewFrameData || _dispatchDlssgOptionsCache.valid || _dispatchReflexOptionsCache.valid)
+     {
+         InvalidateDispatchDlssgOptionsCache();
+         InvalidateDispatchReflexOptionsCache();
+@@ -994,8 +994,21 @@ void DLSSG_Dx12::Deactivate()
+         if (reflexSetOptionsResult != sl::Result::eOk)
+             LOG_ERROR("Couldn't set Reflex options off, error: {}", magic_enum::enum_name(reflexSetOptionsResult));
+ 
+-        _isActive = false;
+-    }
++        // Keep a failed off request eligible for retry on the next Present.
++        _isActive = dlssgSetOptionsResult != sl::Result::eOk || reflexSetOptionsResult != sl::Result::eOk;
++        _waitingNewFrameData = false;
++        // Keep the requested count: the multiplier controls still use it while
++        // inactive. Actual generation and limiter state are reset separately.
++        State::Instance().dlssgDetectedInterpolationCount = 0;
++        ReflexHooks::setDlssgFrameCount(0);
++        ReflexHooks::setFPSLimit(Config::Instance()->FramerateLimit.value_or_default());
++        LOG_INFO("[MHWFG lifecycle] DLSSG off={}, Reflex off={}, generated_frames=0, off_retry={}",
++                 magic_enum::enum_name(dlssgSetOptionsResult), magic_enum::enum_name(reflexSetOptionsResult), _isActive);
++    }
++    // Without upscaler callbacks, a warm-up target never advances. Leaving it
++    // paused also prevents MHW's cold-off swapchain-wait bypass from running.
++    _targetFrame = 0;
++    _waitingNewFrameData = false;
+ }
+ 
+ void DLSSG_Dx12::DestroyFGContext()
+diff --git a/OptiScaler/hooks/FG_Hooks.cpp b/OptiScaler/hooks/FG_Hooks.cpp
+index 5ac15c9..be5c855 100644
+--- a/OptiScaler/hooks/FG_Hooks.cpp
++++ b/OptiScaler/hooks/FG_Hooks.cpp
+@@ -26,6 +26,7 @@
+ #include <cstring>
+ #include <optional>
+ #include <array>
++#include <atomic>
+ 
+ namespace
+ {
+@@ -57,6 +58,58 @@ static bool FgPresentIsMhwProcess()
+     return isMhw;
+ }
+ 
++static std::atomic<int64_t> mhwSwapchainWaitNs { 0 };
++static std::atomic<unsigned> mhwSwapchainWaitCalls { 0 };
++static std::atomic<unsigned> mhwSwapchainWaitBypassed { 0 };
++
++static void MhwLogPresentTiming(bool enabled, int backend, double frameMs, double fgWorkMs,
++                                double presentMs, double sleepMs, double limiterMs)
++{
++    if (!FgPresentIsMhwProcess() || !Config::Instance()->LogToFile.value_or_default())
++        return;
++    struct Samples
++    {
++        bool enabled = false;
++        int backend = -1;
++        unsigned count = 0;
++        double frames = 0, fgWork = 0, present = 0, sleep = 0, limiter = 0, swapWait = 0;
++        unsigned waitCalls = 0, waitBypassed = 0;
++        std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
++    };
++    static thread_local Samples samples;
++    const auto now = std::chrono::steady_clock::now();
++    if (samples.enabled != enabled || samples.backend != backend)
++    {
++        samples = {};
++        samples.enabled = enabled;
++        samples.backend = backend;
++        samples.start = now;
++    }
++    samples.count++;
++    samples.frames += frameMs;
++    samples.fgWork += fgWorkMs;
++    samples.present += presentMs;
++    samples.sleep += sleepMs;
++    samples.limiter += limiterMs;
++    samples.swapWait += mhwSwapchainWaitNs.exchange(0, std::memory_order_relaxed) / 1'000'000.0;
++    samples.waitCalls += mhwSwapchainWaitCalls.exchange(0, std::memory_order_relaxed);
++    samples.waitBypassed += mhwSwapchainWaitBypassed.exchange(0, std::memory_order_relaxed);
++    if (now - samples.start >= std::chrono::seconds(3))
++    {
++        LOG_INFO("[MHWFG timing] fg_active={} backend={} samples={} app_fps={:.1f} frame_ms={:.3f} "
++                 "fg_work_ms={:.3f} present_ms={:.3f} reflex_sleep_ms={:.3f} limiter_ms={:.3f} "
++                 "game_wait_ms={:.3f} wait_calls={} wait_bypassed={} generated_frames={}",
++                 enabled, backend, samples.count, samples.frames > 0 ? 1000.0 * samples.count / samples.frames : 0.0,
++                 samples.frames / samples.count, samples.fgWork / samples.count, samples.present / samples.count,
++                 samples.sleep / samples.count, samples.limiter / samples.count, samples.swapWait / samples.count,
++                 samples.waitCalls, samples.waitBypassed, State::Instance().dlssgDetectedInterpolationCount);
++        samples.count = 0;
++        samples.frames = samples.fgWork = samples.present = samples.sleep = samples.limiter = samples.swapWait = 0;
++        samples.waitCalls = samples.waitBypassed = 0;
++        samples.start = now;
++    }
++}
++
+ using MhwSwapchainWaitHelperFn = void(__fastcall*)(void* thisObject);
+ 
+ static constexpr uint8_t kMhwSwapchainWaitHelperSignature[71] = {
+@@ -207,6 +260,7 @@ static bool FgC024ShouldBypassWait(void* callerReturn)
+         return false;
+ 
+     IFGFeature* fg = state.currentFG;
++
+     if (fg == nullptr || !fg->IsActive() || fg->IsPaused())
+         return false;
+ 
+@@ -230,7 +284,9 @@ static bool FgC036ShouldBypassColdOffWait(void* callerReturn)
+         return false;
+     if (state.activeFgOutput != FGOutput::DLSSG)
+         return false;
+-    if (Config::Instance()->FGEnabled.value_or_default())
++    const bool inputsAvailable = state.activeFgInput != FGInput::Upscaler ||
++        (state.currentFeature != nullptr && !state.currentFeature->IsFrozen());
++    if (Config::Instance()->FGEnabled.value_or_default() && inputsAvailable)
+         return false;
+ 
+     IFGFeature* fg = state.currentFG;
+@@ -249,11 +305,23 @@ static bool FgC036ShouldBypassColdOffWait(void* callerReturn)
+ static void __fastcall hkMhwSwapchainWaitHelper(void* thisObject)
+ {
+     void* const callerReturn = _ReturnAddress();
+-    if (FgC024ShouldBypassWait(callerReturn))
++    const bool measure = Config::Instance()->LogToFile.value_or_default();
++    if (FgC024ShouldBypassWait(callerReturn) || FgC036ShouldBypassColdOffWait(callerReturn))
++    {
++        if (measure)
++            mhwSwapchainWaitBypassed.fetch_add(1, std::memory_order_relaxed);
+         return;
+-    if (FgC036ShouldBypassColdOffWait(callerReturn))
++    }
++    if (!measure)
++    {
++        o_MhwSwapchainWaitHelper(thisObject);
+         return;
++    }
++    const auto begin = std::chrono::steady_clock::now();
+     o_MhwSwapchainWaitHelper(thisObject);
++    mhwSwapchainWaitNs.fetch_add(std::chrono::duration_cast<std::chrono::nanoseconds>(
++                                    std::chrono::steady_clock::now() - begin).count(), std::memory_order_relaxed);
++    mhwSwapchainWaitCalls.fetch_add(1, std::memory_order_relaxed);
+ }
+ 
+ static void FgC024TryInstallSwapchainWaitHook()
+@@ -1501,6 +1569,23 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+ 
+     IFGFeature* fg = state.currentFG;
+ 
++    // EvaluateState normally runs from the upscaler callback. If MHWSS stops
++    // producing inputs, that callback cannot deliver the user's Off request.
++    // Present continues, so enforce Off here even while FG is paused/waiting.
++    const bool missingUpscalerInput = state.activeFgInput == FGInput::Upscaler &&
++        (state.currentFeature == nullptr || state.currentFeature->IsFrozen());
++    const bool fgRequestedAndHasInput = config->FGEnabled.value_or_default() && !missingUpscalerInput;
++    if (willPresent && fg != nullptr && !fgRequestedAndHasInput && (fg->IsActive() || fg->IsPaused()))
++    {
++        std::optional<OwnedLockGuard> stopLock;
++        if (!fg->Mutex.currentThreadHoldsLock())
++            stopLock.emplace(fg->Mutex, 557);
++        LOG_INFO("[MHWFG lifecycle] stopping on Present: requested={}, missing_input={}, paused={}",
++                 config->FGEnabled.value_or_default(), missingUpscalerInput, fg->IsPaused());
++        fg->Deactivate();
++        state.clearCapturedHudlesses = true;
++    }
++
+     if (MhwFgFailure::BlocksFgActivation())
+     {
+         config->FGEnabled.set_volatile_value(false);
+@@ -1574,7 +1659,7 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+         LOG_TRACE("Accuired FG->Mutex: {}", fg->Mutex.getOwner());
+     }
+ 
+-    const bool fgFeatureActive = fg != nullptr && fg->IsActive() && !fg->IsPaused();
++    const bool fgFeatureActive = fgRequestedAndHasInput && fg != nullptr && fg->IsActive() && !fg->IsPaused();
+ 
+     sl::FrameToken* localToken = nullptr;
+     sl::Result tokenResult = sl::Result::eErrorReflexAPI;
+@@ -1602,6 +1687,7 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+         }
+     }
+ 
++    const auto measuredFgStart = std::chrono::steady_clock::now();
+     if (willPresent && fgFeatureActive)
+     {
+         if (state.activeFgInput == FGInput::FSRFG)
+@@ -1615,6 +1701,7 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+     {
+         LOG_TRACE("FGHooks::FGPresent: FG feature exists but is inactive/paused; pass-through present only");
+     }
++    const auto measuredFgEnd = std::chrono::steady_clock::now();
+ 
+     if (pendingMhwPresentStart && tokenResult == sl::Result::eOk && localToken != nullptr &&
+         StreamlineProxy::PCLSetMarker() != nullptr)
+@@ -1661,11 +1748,13 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+     if (willPresent)
+         state.fgPresentIsCalled = true;
+ 
++    const auto measuredPresentStart = std::chrono::steady_clock::now();
+     HRESULT result;
+     if (pPresentParameters == nullptr)
+         result = o_FGSCPresent(This, SyncInterval, Flags);
+     else
+         result = o_FGSCPresent1((IDXGISwapChain1*) This, SyncInterval, Flags, pPresentParameters);
++    const auto measuredPresentEnd = std::chrono::steady_clock::now();
+ 
+     if (result == S_OK)
+     {
+@@ -1677,6 +1766,7 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+             Util::GetDeviceRemovedReason(state.currentD3D12Device);
+     }
+ 
++    const auto measuredSleepStart = std::chrono::steady_clock::now();
+     if (tokenResult == sl::Result::eOk && localToken != nullptr && fgFeatureActive &&
+         (!ReflexHooks::gameIsSendingMarkers() || !config->FGDLSSGUseGamesReflexMarkers.value_or_default()) &&
+         willPresent && state.activeFgOutput == FGOutput::DLSSG)
+@@ -1687,11 +1777,11 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+         LOG_DEBUG("Calling ReflexSleep");
+         StreamlineProxy::ReflexSleep()(*localToken);
+     }
+-
++    const auto measuredSleepEnd = std::chrono::steady_clock::now();
+     if (state.swapchainInteropApi == SwapchainInteropApi::None)
+         Hudfix_Dx12::PresentEnd();
+ 
+-    const bool fgActiveForLimit = fg != nullptr ? fg->IsActive() && !fg->IsPaused() : false;
++    const bool fgActiveForLimit = fgRequestedAndHasInput && fg != nullptr && fg->IsActive() && !fg->IsPaused();
+     const bool frameLimitPath =
+         willPresent && !state.reflexLimitsFps && state.activeFgOutput != FGOutput::NoFG &&
+         !IdentifyGpu::getPrimaryGpu().usesDxvk && !XellHooks::canLimit();
+@@ -1699,8 +1789,17 @@ HRESULT FGHooks::FGPresent(IDXGISwapChain* This, UINT SyncInterval, UINT Flags,
+         FgPresentResolveFrameLimitOutputMultiplier(fgActiveForLimit, fg, state.activeFgOutput,
+                                                  config->FGDLSSGForceDMFG.value_or_default());
+ 
++    const auto measuredLimiterStart = std::chrono::steady_clock::now();
+     if (frameLimitPath)
+         FrameLimit::sleep(fgActiveForLimit, frameLimitOutputMultiplier);
++    const auto measuredLimiterEnd = std::chrono::steady_clock::now();
++    if (willPresent)
++        MhwLogPresentTiming(fgFeatureActive, state.currentFeature ? (int)state.currentFeature->GetUpscalerType() : -1,
++                            state.lastFGFrameTime,
++                            std::chrono::duration<double, std::milli>(measuredFgEnd - measuredFgStart).count(),
++                            std::chrono::duration<double, std::milli>(measuredPresentEnd - measuredPresentStart).count(),
++                            std::chrono::duration<double, std::milli>(measuredSleepEnd - measuredSleepStart).count(),
++                            std::chrono::duration<double, std::milli>(measuredLimiterEnd - measuredLimiterStart).count());
+ 
+     if ((config->SimulateWaitableObject.value_or_default() ||
+          (state.gameEngine == GameEngineType::Unity && state.activeFgOutput == FGOutput::XeFG)) &&
+diff --git a/OptiScaler/inputs/NVNGX_DLSS_Dx12.cpp b/OptiScaler/inputs/NVNGX_DLSS_Dx12.cpp
+index a1ee530..88413ab 100644
+--- a/OptiScaler/inputs/NVNGX_DLSS_Dx12.cpp
++++ b/OptiScaler/inputs/NVNGX_DLSS_Dx12.cpp
+@@ -23,8 +23,12 @@
+ #include <ankerl/unordered_dense.h>
+ #include <misc/IdentifyGpu.h>
+ #include <misc/MhwFgFailure.h>
++#include <upscalers/native/MhwssJitter.h>
+ 
+-static bool MhwDlssBackend(Upscaler upscaler) { return upscaler == Upscaler::DLSS || upscaler == Upscaler::DLSSD; }
++static bool MhwDlssBackend(Upscaler upscaler)
++{
++    return upscaler == Upscaler::DLSS || upscaler == Upscaler::DLSSD || upscaler == Upscaler::Native;
++}
+ 
+ static void ReleaseCreateParams(ContextData<IFeature_Dx12>& ctx)
+ {
+@@ -924,7 +928,20 @@ NVSDK_NGX_API NVSDK_NGX_Result NVSDK_NGX_D3D12_ReleaseFeature(NVSDK_NGX_Handle*
+         auto& entry = it->second;
+ 
+         if (entry.feature.get() == State::Instance().currentFeature)
++        {
++            auto& state = State::Instance();
++            if (!state.isShuttingDown && state.activeFgInput == FGInput::Upscaler && state.currentFG != nullptr)
++            {
++                std::optional<OwnedLockGuard> stopLock;
++                if (!state.currentFG->Mutex.currentThreadHoldsLock())
++                    stopLock.emplace(state.currentFG->Mutex, 556);
++                LOG_INFO("[MHWFG lifecycle] upscaler input released; disabling FG before releasing its resources");
++                state.currentFG->Deactivate();
++                state.clearCapturedHudlesses = true;
++                state.fgChanged = true;
++            }
+             State::Instance().currentFeature = nullptr;
++        }
+ 
+         ReleaseCreateParams(entry);
+ 
+@@ -1136,6 +1153,12 @@ static NVSDK_NGX_Result TryEvaluateOptiFeature(ID3D12GraphicsCommandList* InCmdL
+ 
+     if (!evalSuccess)
+     {
++        if (feature->GetUpscalerType() == Upscaler::Native)
++        {
++            ctxData.terminalFailure = true;
++            MhwssJitter::Disable();
++            MhwFgFailure::Latch(MhwFgFailureStage::NativeCopyFailed);
++        }
+         LOG_ERROR("Feature evaluation failed for '{}'", feature->Name());
+         ImGui::InsertNotification({ ImGuiToastType::Error, 10000, "Upscaler failed to run!" });
+     }
+diff --git a/OptiScaler/menu/menu_common.cpp b/OptiScaler/menu/menu_common.cpp
+index cbf74e6..be4e5eb 100644
+--- a/OptiScaler/menu/menu_common.cpp
++++ b/OptiScaler/menu/menu_common.cpp
+@@ -528,7 +528,7 @@ void MenuCommon::AddDx11Backends(Upscaler upscaler)
+ void MenuCommon::AddDx12Backends(Upscaler upscaler)
+ {
+     RenderUpscalerCombo(API::DX12, upscaler,
+-                        { Upscaler::XeSS, Upscaler::FSR21, Upscaler::FSR22, Upscaler::FFX, Upscaler::DLSS });
++                        { Upscaler::XeSS, Upscaler::FSR21, Upscaler::FSR22, Upscaler::FFX, Upscaler::DLSS, Upscaler::Native });
+ }
+ 
+ void MenuCommon::AddVulkanBackends(Upscaler upscaler)
+@@ -2468,6 +2468,27 @@ void MenuCommon::RenderMhwFgHomePage(RenderMenuContext& ctx)
+ 
+     ImGui::Spacing();
+     RenderFramerateSettings(ctx, true);
++
++    ImGui::SeparatorText("Antialiasing");
++    const auto aaBackend = config->Dx12Upscaler.value_or_default();
++    const char* aaLabel = aaBackend == Upscaler::Native ? "Off (Native, experimental)" :
++                          aaBackend == Upscaler::DLSS ? "DLAA" : "Advanced selection";
++    if (ImGui::BeginCombo("##MhwAntialiasing", aaLabel))
++    {
++        for (auto backend : { Upscaler::DLSS, Upscaler::Native })
++        {
++            const char* label = backend == Upscaler::Native ? "Off (Native, experimental)" : "DLAA";
++            if (ImGui::Selectable(label, backend == aaBackend) && backend != aaBackend)
++            {
++                config->Dx12Upscaler = backend;
++                state.newBackend = backend;
++                MARK_ALL_BACKENDS_CHANGED();
++            }
++        }
++        ImGui::EndCombo();
++    }
++    if (aaBackend == Upscaler::Native)
++        ImGui::TextWrapped("No temporal AA. Fine edges can shimmer. Keep MHWSS on DLSS for FG inputs.");
+ }
+ 
+ void MenuCommon::RenderMainMenuHeaderMessages(RenderMenuContext& ctx)
+@@ -2734,6 +2755,11 @@ void MenuCommon::RenderActiveUpscalerSettings(RenderMenuContext& ctx)
+             }
+         }
+ 
++        if (currentBackend == Upscaler::Native)
++        {
++            ImGui::TextWrapped("No AA: native frame copy with version-checked MHWSS projection jitter suppression.");
++        }
++
+         if (currentFeature->AccessToReactiveMask())
+         {
+             ImGui::BeginDisabled(config->DisableReactiveMask.value_or(false));
+diff --git a/OptiScaler/misc/MhwFgFailure.h b/OptiScaler/misc/MhwFgFailure.h
+index d4cbc99..14ce652 100644
+--- a/OptiScaler/misc/MhwFgFailure.h
++++ b/OptiScaler/misc/MhwFgFailure.h
+@@ -14,6 +14,7 @@ enum class MhwFgFailureStage : uint8_t
+     FeatureCreate,
+     InitFailed,
+     RebuildFailed,
++    NativeCopyFailed,
+ };
+ 
+ namespace MhwFgFailure
+@@ -55,6 +56,8 @@ inline const char* StageName(MhwFgFailureStage stage)
+         return "initialization";
+     case MhwFgFailureStage::RebuildFailed:
+         return "rebuild";
++    case MhwFgFailureStage::NativeCopyFailed:
++        return "native copy";
+     default:
+         return "unknown";
+     }
+@@ -62,6 +65,8 @@ inline const char* StageName(MhwFgFailureStage stage)
+ 
+ inline const char* UserMessage()
+ {
++    if (Stage() == MhwFgFailureStage::NativeCopyFailed)
++        return "Native No AA rejected incompatible frame buffers; FG is disabled. Select DLAA and restart.";
+     return "DLSS creation/initialization/rebuild failed; FG is disabled. Fix configuration and restart the game. "
+            "Rendering may not recover until restart.";
+ }
+diff --git a/OptiScaler/upscalers/FeatureProvider_Dx12.cpp b/OptiScaler/upscalers/FeatureProvider_Dx12.cpp
+index 4f73284..098cde7 100644
+--- a/OptiScaler/upscalers/FeatureProvider_Dx12.cpp
++++ b/OptiScaler/upscalers/FeatureProvider_Dx12.cpp
+@@ -7,6 +7,8 @@
+ #include "NVNGX_Parameter.h"
+ 
+ #include "upscalers/dlss/DLSSFeature_Dx12.h"
++#include "upscalers/native/NativeFeature_Dx12.h"
++#include "upscalers/native/MhwssJitter.h"
+ #include "upscalers/dlssd/DLSSDFeature_Dx12.h"
+ #include "upscalers/fsr2/FSR2Feature_Dx12.h"
+ #include "upscalers/fsr2_212/FSR2Feature_Dx12_212.h"
+@@ -18,7 +20,10 @@
+ 
+ namespace
+ {
+-static bool MhwDlssBackend(Upscaler upscaler) { return upscaler == Upscaler::DLSS || upscaler == Upscaler::DLSSD; }
++static bool MhwDlssBackend(Upscaler upscaler)
++{
++    return upscaler == Upscaler::DLSS || upscaler == Upscaler::DLSSD || upscaler == Upscaler::Native;
++}
+ 
+ static void ReleaseCreateParams(ContextData<IFeature_Dx12>* contextData)
+ {
+@@ -60,11 +65,18 @@ bool FeatureProvider_Dx12::GetFeature(Upscaler upscaler, UINT handleId, NVSDK_NG
+ 
+     const Upscaler requestedUpscaler = upscaler;
+ 
++    if (upscaler != Upscaler::Native)
++        MhwssJitter::Disable();
++
+     if (MhwFgFailure::PolicyActive() && MhwDlssBackend(requestedUpscaler) && MhwFgFailure::IsLatched())
+         return false;
+ 
+     switch (upscaler)
+     {
++    case Upscaler::Native:
++        *feature = std::make_unique<NativeFeatureDx12>(handleId, parameters);
++        break;
++
+     case Upscaler::XeSS:
+         *feature = std::make_unique<XeSSFeatureDx12>(handleId, parameters);
+         break;
+diff --git a/OptiScaler/upscalers/IFeature_Dx12.cpp b/OptiScaler/upscalers/IFeature_Dx12.cpp
+index 0273356..188ad56 100644
+--- a/OptiScaler/upscalers/IFeature_Dx12.cpp
++++ b/OptiScaler/upscalers/IFeature_Dx12.cpp
+@@ -52,6 +52,17 @@ bool IFeature_Dx12::Evaluate(ID3D12GraphicsCommandList* InCommandList, NVSDK_NGX
+         return false;
+     }
+ 
++    // Keep FG's UpscaleStart/End hooks, but bypass every reconstruction and
++    // postprocess stage for the explicit native/no-AA backend.
++    if (GetUpscalerType() == Upscaler::Native)
++    {
++        _sharpness = 0.0f;
++        UpscalerTime->Start(InCommandList);
++        const bool copied = EvaluateInternal(InCommandList, InParameters);
++        UpscalerTime->End(InCommandList);
++        return copied;
++    }
++
+     if (Config::Instance()->OverrideSharpness.value_or_default())
+         _sharpness = Config::Instance()->Sharpness.value_or_default();
+     else
